@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PTJ_Operational_Db" Class="dbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=ds1ptjsql03;Initial Catalog=PTJ_Operational_Db;User ID=svcUser" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PTJ_Operational_DbConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="Adress.Adress" Member="Adresses">
+    <Type Name="Adress">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AdressTyp_FKID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AdressVariant_FKID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Adress_GatuAdress" Member="GatuAdresses" ThisKey="Id" OtherKey="Adress_FKID" Type="GatuAdress" />
+      <Association Name="Adress_Mail" Member="Mails" ThisKey="Id" OtherKey="Adress_FKID" Type="Mail" />
+      <Association Name="Adress_Organisation_Adress" Member="Organisation_Adresses" ThisKey="Id" OtherKey="Adress_FKID" Type="Organisation_Adress" />
+      <Association Name="Adress_Person_Adress" Member="Person_Adresses" ThisKey="Id" OtherKey="Adress_FKID" Type="Person_Adress" />
+      <Association Name="Adress_Telefon" Member="Telefons" ThisKey="Id" OtherKey="Adress_FKID" Type="Telefon" />
+      <Association Name="AdressTyp_Adress" Member="AdressTyp" ThisKey="AdressTyp_FKID" OtherKey="Id" Type="AdressTyp" IsForeignKey="true" />
+      <Association Name="AdressVariant_Adress" Member="AdressVariant" ThisKey="AdressVariant_FKID" OtherKey="Id" Type="AdressVariant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Person.Person_Sjuk_Hälsovårds_Personal" Member="Person_Sjuk_Hälsovårds_Personals">
+    <Type Name="Person_Sjuk_Hälsovårds_Personal">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Person_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Sjuk_Hälsovårds_Personal_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Person_Person_Sjuk_Hälsovårds_Personal" Member="Person" ThisKey="Person_FKID" OtherKey="Id" Type="Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Adress.AdressTyp" Member="AdressTyps">
+    <Type Name="AdressTyp">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Typ" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="AdressTyp_Adress" Member="Adresses" ThisKey="Id" OtherKey="AdressTyp_FKID" Type="Adress" />
+      <Association Name="AdressTyp_AdressVariant" Member="AdressVariants" ThisKey="Id" OtherKey="AdressTyp_FKID" Type="AdressVariant" />
+    </Type>
+  </Table>
+  <Table Name="Adress.AdressVariant" Member="AdressVariants">
+    <Type Name="AdressVariant">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AdressTyp_FKID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Variant" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="AdressVariant_Adress" Member="Adresses" ThisKey="Id" OtherKey="AdressVariant_FKID" Type="Adress" />
+      <Association Name="AdressTyp_AdressVariant" Member="AdressTyp" ThisKey="AdressTyp_FKID" OtherKey="Id" Type="AdressTyp" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Adress.GatuAdress" Member="GatuAdresses">
+    <Type Name="GatuAdress">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Adress_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AdressRad1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AdressRad2" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AdressRad3" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AdressRad4" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AdressRad5" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Postnummer" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Stad" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Land" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Adress_GatuAdress" Member="Adress" ThisKey="Adress_FKID" OtherKey="Id" Type="Adress" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Adress.Mail" Member="Mails">
+    <Type Name="Mail">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Adress_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MailAdress" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Adress_Mail" Member="Adress" ThisKey="Adress_FKID" OtherKey="Id" Type="Adress" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Adress.Organisation_Adress" Member="Organisation_Adresses">
+    <Type Name="Organisation_Adress">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Organisation_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Adress_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Adress_Organisation_Adress" Member="Adress" ThisKey="Adress_FKID" OtherKey="Id" Type="Adress" IsForeignKey="true" />
+      <Association Name="Organisation_Organisation_Adress" Member="Organisation" ThisKey="Organisation_FKID" OtherKey="Id" Type="Organisation" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Adress.Person_Adress" Member="Person_Adresses">
+    <Type Name="Person_Adress">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Person_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Adress_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Adress_Person_Adress" Member="Adress" ThisKey="Adress_FKID" OtherKey="Id" Type="Adress" IsForeignKey="true" />
+      <Association Name="Person_Person_Adress" Member="Person" ThisKey="Person_FKID" OtherKey="Id" Type="Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Adress.Telefon" Member="Telefons">
+    <Type Name="Telefon">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Adress_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TelefonNummer" Type="System.Decimal" DbType="Decimal(25,0) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Adress_Telefon" Member="Adress" ThisKey="Adress_FKID" OtherKey="Id" Type="Adress" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Organisation.Organisation" Member="Organisations">
+    <Type Name="Organisation">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="OrganisationsId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpDateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="IngårIOrganisation" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Organisation_Organisation_Adress" Member="Organisation_Adresses" ThisKey="Id" OtherKey="Organisation_FKID" Type="Organisation_Adress" />
+      <Association Name="Organisation_Organisation" Member="Organisations" ThisKey="Id" OtherKey="IngårIOrganisation" Type="Organisation" />
+      <Association Name="Organisation_Organisation" Member="Organisation1" ThisKey="IngårIOrganisation" OtherKey="Id" Type="Organisation" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Person.Person" Member="Persons">
+    <Type Name="Person">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FörNamn" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MellanNamn" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Efternamn" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PersonNummer" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Person_Person_Sjuk_Hälsovårds_Personal" Member="Person_Sjuk_Hälsovårds_Personals" ThisKey="Id" OtherKey="Person_FKID" Type="Person_Sjuk_Hälsovårds_Personal" />
+      <Association Name="Person_Person_Adress" Member="Person_Adresses" ThisKey="Id" OtherKey="Person_FKID" Type="Person_Adress" />
+      <Association Name="Person_Person_AnnanPerson" Member="Person_AnnanPersons" ThisKey="Id" OtherKey="Person_FKID" Type="Person_AnnanPerson" />
+      <Association Name="Person_Person_Anställd" Member="Person_Anställds" ThisKey="Id" OtherKey="Person_FKID" Type="Person_Anställd" />
+      <Association Name="Person_Person_Konsult" Member="Person_Konsults" ThisKey="Id" OtherKey="Person_FKID" Type="Person_Konsult" />
+      <Association Name="Person_Person_Patient" Member="Person_Patients" ThisKey="Id" OtherKey="Person_FKID" Type="Person_Patient" />
+    </Type>
+  </Table>
+  <Table Name="Person.Person_AnnanPerson" Member="Person_AnnanPersons">
+    <Type Name="Person_AnnanPerson">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Person_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnnanPerson_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Person_Person_AnnanPerson" Member="Person" ThisKey="Person_FKID" OtherKey="Id" Type="Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Person.Person_Anställd" Member="Person_Anställds">
+    <Type Name="Person_Anställd">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Person_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Anställd_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Person_Person_Anställd" Member="Person" ThisKey="Person_FKID" OtherKey="Id" Type="Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Person.Person_Konsult" Member="Person_Konsults">
+    <Type Name="Person_Konsult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Person_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Konsult_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Person_Person_Konsult" Member="Person" ThisKey="Person_FKID" OtherKey="Id" Type="Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="Person.Person_Patient" Member="Person_Patients">
+    <Type Name="Person_Patient">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Person_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Patient_FKID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UpdateradAv" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="SkapadDatum" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateradDatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Person_Person_Patient" Member="Person" ThisKey="Person_FKID" OtherKey="Id" Type="Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
